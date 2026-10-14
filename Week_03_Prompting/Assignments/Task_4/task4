@@ -1,0 +1,8 @@
+In Task 3 we introduced the Prompt Score (PS) metric. The composite score weights accuracy ($a$) heavily at $60\%$, with execution time ($t$) at $20\%$, credit usage ($c$) at $15\%$, and step count ($s$) at $5\%$:   $$PS = a \cdot 0.6 + t \cdot 0.2 + c \cdot 0.15 + s \cdot 0.05$$The resulting composite scores clearly differentiate the frameworks:   COT: $0.9861$ (Dominates due to superior accuracy and minimal resource overhead)   ICIO: $0.7624$ (Penalized by high execution time and step count despite solid accuracy)   RTF: $0.7121$ (Weighed down heavily by substandard classification accuracy).
+
+To determine if the performance deltas between prompts are statistically significant we conducted Z-test
+COT vs. ICIO (99.35% vs. 92.26%):The 7.09 percentage point difference corresponds to a $Z$-score of approximately $3.12$, having a $p$-value $< 0.002$. This confirms that the superiority of COT over ICIO is statistically highly significant.
+
+ICIO vs. RTF (92.26% vs. 69.68%):The 22.58 percentage point difference yields a $Z$-score $> 5.2$, corresponding to a $p$-value $< 0.0001$. This indicates an extremely significant difference, proving that structured context (ICIO) drastically outperforms basic role-task framing (RTF) on complex matching tasks.
+
+COT vs. RTF (99.35% vs. 69.68%): Extremely significant ($p < 0.0001$).
