@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="980" viewBox="0 0 1500 980" role="img" aria-labelledby="title desc">
+  <title id="title">Requirements refinement agentic network architecture</title>
+  <desc id="desc">A LangGraph workflow with deterministic loading and validation nodes, four LLM nodes, a review feedback loop, and Markdown rendering.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <path d="M0,0 L10,3 L0,6 Z" fill="#334155"/>
+    </marker>
+    <style>
+      .title { font: 700 30px Arial, sans-serif; fill: #0f172a; }
+      .subtitle { font: 16px Arial, sans-serif; fill: #475569; }
+      .node-title { font: 700 17px Arial, sans-serif; fill: #0f172a; }
+      .node-text { font: 14px Arial, sans-serif; fill: #334155; }
+      .edge-label { font: 13px Arial, sans-serif; fill: #475569; }
+      .node { stroke-width: 2; rx: 16; }
+      .deterministic { fill: #dcfce7; stroke: #15803d; }
+      .llm { fill: #dbeafe; stroke: #2563eb; }
+      .control { fill: #fef3c7; stroke: #d97706; }
+      .output { fill: #f3e8ff; stroke: #9333ea; }
+      .edge { stroke: #334155; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .feedback { stroke: #d97706; stroke-width: 2.5; fill: none; stroke-dasharray: 9 6; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect width="1500" height="980" fill="#ffffff"/>
+  <text x="750" y="55" text-anchor="middle" class="title">Agentic Requirements Refinement Network</text>
+  <text x="750" y="84" text-anchor="middle" class="subtitle">LangGraph workflow: source corpus → structured, traceable requirements document</text>
+
+  <rect x="60" y="145" width="250" height="125" class="node deterministic"/>
+  <text x="185" y="180" text-anchor="middle" class="node-title">1. load_documents</text>
+  <text x="185" y="208" text-anchor="middle" class="node-text">Deterministic</text>
+  <text x="185" y="232" text-anchor="middle" class="node-text">Read .txt/.eml files</text>
+  <text x="185" y="254" text-anchor="middle" class="node-text">Preserve source filenames</text>
+
+  <rect x="390" y="125" width="290" height="165" class="node llm"/>
+  <text x="535" y="160" text-anchor="middle" class="node-title">2. extract_candidates</text>
+  <text x="535" y="188" text-anchor="middle" class="node-text">LLM: gpt-5.6-luna</text>
+  <text x="535" y="216" text-anchor="middle" class="node-text">Extract explicit and</text>
+  <text x="535" y="238" text-anchor="middle" class="node-text">implied requirements</text>
+  <text x="535" y="266" text-anchor="middle" class="node-text">Assign priority and sources</text>
+
+  <rect x="760" y="125" width="300" height="165" class="node llm"/>
+  <text x="910" y="160" text-anchor="middle" class="node-title">3. consolidate_requirements</text>
+  <text x="910" y="188" text-anchor="middle" class="node-text">LLM: gpt-5-mini</text>
+  <text x="910" y="216" text-anchor="middle" class="node-text">Merge semantic duplicates</text>
+  <text x="910" y="238" text-anchor="middle" class="node-text">Resolve conflicts</text>
+  <text x="910" y="266" text-anchor="middle" class="node-text">Create blacklist entries</text>
+
+  <rect x="1140" y="145" width="300" height="125" class="node deterministic"/>
+  <text x="1290" y="180" text-anchor="middle" class="node-title">4. deterministic_validate</text>
+  <text x="1290" y="208" text-anchor="middle" class="node-text">Validate required fields</text>
+  <text x="1290" y="232" text-anchor="middle" class="node-text">Assign stable REQ-### IDs</text>
+  <text x="1290" y="254" text-anchor="middle" class="node-text">Normalize source lists</text>
+
+  <rect x="1140" y="410" width="300" height="150" class="node llm"/>
+  <text x="1290" y="445" text-anchor="middle" class="node-title">5. review_requirements</text>
+  <text x="1290" y="473" text-anchor="middle" class="node-text">LLM: gpt-4o-mini</text>
+  <text x="1290" y="501" text-anchor="middle" class="node-text">Check duplicates, conflicts,</text>
+  <text x="1290" y="523" text-anchor="middle" class="node-text">completeness and traceability</text>
+
+  <rect x="760" y="410" width="300" height="150" class="node control"/>
+  <text x="910" y="445" text-anchor="middle" class="node-title">route_review</text>
+  <text x="910" y="473" text-anchor="middle" class="node-text">Deterministic decision</text>
+  <text x="910" y="501" text-anchor="middle" class="node-text">Accepted or max 2 revisions?</text>
+  <text x="910" y="523" text-anchor="middle" class="node-text">Otherwise revise</text>
+
+  <rect x="390" y="410" width="290" height="150" class="node llm"/>
+  <text x="535" y="445" text-anchor="middle" class="node-title">6. revise_requirements</text>
+  <text x="535" y="473" text-anchor="middle" class="node-text">LLM: gpt-5.4-nano</text>
+  <text x="535" y="501" text-anchor="middle" class="node-text">Repair audit findings</text>
+  <text x="535" y="523" text-anchor="middle" class="node-text">Preserve coverage and tracing</text>
+
+  <rect x="760" y="700" width="300" height="125" class="node output"/>
+  <text x="910" y="735" text-anchor="middle" class="node-title">7. render</text>
+  <text x="910" y="763" text-anchor="middle" class="node-text">Deterministic Markdown output</text>
+  <text x="910" y="787" text-anchor="middle" class="node-text">Requirements + blacklist</text>
+  <text x="910" y="809" text-anchor="middle" class="node-text">requirements_document.md</text>
+
+  <path d="M310 207 L390 207" class="edge"/>
+  <path d="M680 207 L760 207" class="edge"/>
+  <path d="M1060 207 L1140 207" class="edge"/>
+  <path d="M1290 270 L1290 410" class="edge"/>
+  <path d="M1140 485 L1060 485" class="edge"/>
+  <path d="M760 485 L680 485" class="edge"/>
+  <path d="M535 560 C535 625 1290 625 1290 560" class="feedback"/>
+  <text x="910" y="615" text-anchor="middle" class="edge-label">revision_count &lt; 2 → validate again</text>
+  <path d="M910 560 L910 700" class="edge"/>
+  <text x="935" y="650" class="edge-label">accepted / limit reached</text>
+
+  <rect x="60" y="700" width="560" height="125" fill="#f8fafc" stroke="#94a3b8" stroke-width="2" rx="16"/>
+  <text x="85" y="735" class="node-title">Legend</text>
+  <rect x="85" y="760" width="22" height="22" class="deterministic"/>
+  <text x="120" y="777" class="node-text">Deterministic Python node</text>
+  <rect x="300" y="760" width="22" height="22" class="llm"/>
+  <text x="335" y="777" class="node-text">LLM-invoking node</text>
+  <rect x="485" y="760" width="22" height="22" class="control"/>
+  <text x="520" y="777" class="node-text">Routing/control</text>
+</svg>
