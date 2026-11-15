@@ -1,0 +1,243 @@
+[
+  {
+    "task": "OrderStatus.is_terminal",
+    "target_file": "playground/playground/enums.py",
+    "retrieved_chunk_ids": [
+      "playground/tests/test_enums.py::OrderStatusTests.test_cancelled_is_terminal::16",
+      "playground/tests/test_enums.py::OrderStatusTests.test_shipped_is_terminal::15",
+      "playground/playground/enums.py::OrderStatus.is_terminal::7",
+      "playground/tests/test_enums.py::OrderStatusTests.test_new_is_not_terminal::17",
+      "playground/tests/test_enums.py::OrderStatusTests.test_reserved_is_not_terminal::18"
+    ],
+    "retrieved_sources": [
+      "playground/playground/enums.py",
+      "playground/tests/test_enums.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 524,
+      "completion_tokens": 41,
+      "total_tokens": 565
+    },
+    "generated_code": "@property\ndef is_terminal(self) -> bool:\n    \"\"\"True when the status ends further transitions.\"\"\"\n    return self in {OrderStatus.CANCELLED, OrderStatus.SHIPPED}"
+  },
+  {
+    "task": "InventoryLedger.__contains__",
+    "target_file": "playground/playground/inventory.py",
+    "retrieved_chunk_ids": [
+      "playground/playground/inventory.py::InventoryLedger.add_stock::9",
+      "playground/playground/inventory.py::InventoryLedger.__len__::15",
+      "playground/playground/inventory.py::InventoryLedger.__contains__::14",
+      "playground/playground/inventory.py::InventoryLedger.__iter__::16",
+      "playground/playground/inventory.py::InventoryLedger.available::10"
+    ],
+    "retrieved_sources": [
+      "playground/playground/inventory.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 2374,
+      "completion_tokens": 63,
+      "total_tokens": 2437
+    },
+    "generated_code": "def __contains__(self, sku: object) -> bool:\n    \"\"\"Return whether ``sku`` normalises to a SKU with positive on-hand stock.\"\"\"\n    sku = self._require_sku(sku)\n    return self._on_hand.get(sku, 0) > 0"
+  },
+  {
+    "task": "Warehouse.stock_report",
+    "target_file": "playground/playground/inventory.py",
+    "retrieved_chunk_ids": [
+      "playground/playground/inventory.py::Warehouse.stock_report::29",
+      "playground/playground/inventory.py::Warehouse.receive::28",
+      "playground/tests/test_inventory.py::WarehouseTests.test_stock_report_lists_available::88",
+      "playground/tests/test_simulation.py::SimulationStepTests.test_no_stock_records_rejected_and_returns_none::34",
+      "playground/playground/inventory.py::InventoryLedger.add_stock::9"
+    ],
+    "retrieved_sources": [
+      "playground/playground/inventory.py",
+      "playground/tests/test_inventory.py",
+      "playground/tests/test_simulation.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 1902,
+      "completion_tokens": 45,
+      "total_tokens": 1947
+    },
+    "generated_code": "def stock_report(self) -> Dict[str, int]:\n    \"\"\"Return a mapping of SKU to available quantity.\"\"\"\n    return {sku: self._ledger.available(sku) for sku in self._ledger}"
+  },
+  {
+    "task": "OrderStateMachine.transition",
+    "target_file": "playground/playground/orders.py",
+    "retrieved_chunk_ids": [
+      "playground/playground/orders.py::OrderStateMachine.can_transition::10",
+      "playground/playground/orders.py::OrderStateMachine.transition::11",
+      "playground/tests/test_orders.py::OrderStateMachineTests.test_transition_returns_target_when_legal::20",
+      "playground/playground/orders.py::Order.advance::21",
+      "playground/tests/test_orders.py::OrderStateMachineTests.test_reserved_cannot_return_to_new::15"
+    ],
+    "retrieved_sources": [
+      "playground/playground/orders.py",
+      "playground/tests/test_orders.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 3097,
+      "completion_tokens": 61,
+      "total_tokens": 3158
+    },
+    "generated_code": "def transition(self, source: OrderStatus, target: OrderStatus) -> OrderStatus:\n        \"\"\"Return ``target`` if the transition is allowed, else raise.\"\"\"\n        if not self.can_transition(source, target):\n            raise InvalidTransitionError(source, target)\n        return target"
+  },
+  {
+    "task": "OrderLog.by_status",
+    "target_file": "playground/playground/orders.py",
+    "retrieved_chunk_ids": [
+      "playground/playground/orders.py::OrderLog.by_status::37",
+      "playground/playground/orders.py::OrderLog.__iter__::40",
+      "playground/playground/orders.py::Order.status::17",
+      "playground/tests/test_orders.py::OrderLogTests.test_by_status_non_status_raises_on_first_next::87",
+      "playground/tests/test_simulation.py::module::9"
+    ],
+    "retrieved_sources": [
+      "playground/playground/orders.py",
+      "playground/tests/test_orders.py",
+      "playground/tests/test_simulation.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 2944,
+      "completion_tokens": 47,
+      "total_tokens": 2991
+    },
+    "generated_code": "def by_status(self, status: OrderStatus) -> Iterator[Order]:\n    \"\"\"Yield orders whose status matches ``status``.\"\"\"\n    for order in self:\n        if order.status == status:\n            yield order"
+  },
+  {
+    "task": "Customer.can_afford",
+    "target_file": "playground/playground/models.py",
+    "retrieved_chunk_ids": [
+      "playground/playground/models.py::Customer.charge::48",
+      "playground/tests/test_models.py::CustomerTests.test_can_afford_true_within_limit::109",
+      "playground/tests/test_models.py::CustomerTests.test_default_credit_limit_and_balance::99",
+      "playground/playground/models.py::Customer.credit_limit::44",
+      "playground/playground/models.py::Customer::40"
+    ],
+    "retrieved_sources": [
+      "playground/playground/models.py",
+      "playground/tests/test_models.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 1712,
+      "completion_tokens": 46,
+      "total_tokens": 1758
+    },
+    "generated_code": "def can_afford(self, total: Money) -> bool:\n    \"\"\"Return True if ``balance + total`` does not exceed the credit limit.\"\"\"\n    return self._balance + total <= self.credit_limit"
+  },
+  {
+    "task": "Order.__len__",
+    "target_file": "playground/playground/orders.py",
+    "retrieved_chunk_ids": [
+      "playground/tests/test_base.py::_DictRepository.__len__::40",
+      "playground/playground/orders.py::Order.items::18",
+      "playground/playground/orders.py::Order.__len__::22",
+      "playground/playground/orders.py::Order.total::19",
+      "playground/playground/orders.py::OrderLog.__len__::39"
+    ],
+    "retrieved_sources": [
+      "playground/playground/orders.py",
+      "playground/tests/test_base.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 3335,
+      "completion_tokens": 29,
+      "total_tokens": 3364
+    },
+    "generated_code": "def __len__(self) -> int:\n    \"\"\"Return the number of line items.\"\"\"\n    return len(self._items)"
+  },
+  {
+    "task": "BulkDiscountPricing.price",
+    "target_file": "playground/playground/pricing.py",
+    "retrieved_chunk_ids": [
+      "playground/tests/test_pricing.py::BulkDiscountPriceTests.test_quantity_summed_across_lines::37",
+      "playground/tests/test_pricing.py::BulkDiscountPriceTests.test_full_discount_yields_zero::40",
+      "playground/tests/test_pricing.py::BulkDiscountPriceTests.test_zero_percent_returns_base_even_above_threshold::38",
+      "playground/tests/test_pricing.py::BulkDiscountPriceTests.test_discount_uses_floor_division::39",
+      "playground/tests/test_pricing.py::BulkDiscountPriceTests.test_at_threshold_applies_discount::36"
+    ],
+    "retrieved_sources": [
+      "playground/tests/test_pricing.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 2608,
+      "completion_tokens": 96,
+      "total_tokens": 2704
+    },
+    "generated_code": "def price(self, items: Sequence[LineItem]) -> Money:\n        \"\"\"Return the base price, less the discount if the quantity qualifies.\"\"\"\n        total_quantity = sum(item.quantity for item in items)\n        base_price = sum(item.subtotal.cents for item in items)\n\n        if total_quantity >= self.threshold:\n            discount = base_price * self.percent_off // 100\n            return Money(base_price - discount)\n\n        return Money(base_price)"
+  },
+  {
+    "task": "EventBus.__contains__",
+    "target_file": "playground/playground/events.py",
+    "retrieved_chunk_ids": [
+      "playground/tests/test_events.py::EventBusContainsTests.test_contains_false_without_handlers::33",
+      "playground/playground/events.py::EventBus.__len__::10",
+      "playground/playground/events.py::EventBus.__contains__::11",
+      "playground/playground/events.py::EventBus.unsubscribe::8",
+      "playground/playground/events.py::EventBus.publish::9"
+    ],
+    "retrieved_sources": [
+      "playground/playground/events.py",
+      "playground/tests/test_events.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 1071,
+      "completion_tokens": 50,
+      "total_tokens": 1121
+    },
+    "generated_code": "def __contains__(self, event_type: object) -> bool:\n    \"\"\"Return whether any handlers are registered for ``event_type``.\"\"\"\n    return isinstance(event_type, EventType) and bool(self._handlers.get(event_type))"
+  },
+  {
+    "task": "Money.__bool__",
+    "target_file": "playground/playground/models.py",
+    "retrieved_chunk_ids": [
+      "playground/tests/test_models.py::MoneyMiscTests.test_bool_true_for_nonzero::53",
+      "playground/playground/orders.py::OrderBuilder.__bool__::33",
+      "playground/playground/models.py::Money.__bool__::19",
+      "playground/tests/test_models.py::MoneyMiscTests.test_bool_false_for_zero::52",
+      "playground/playground/models.py::Money.__init__::7"
+    ],
+    "retrieved_sources": [
+      "playground/playground/models.py",
+      "playground/playground/orders.py",
+      "playground/tests/test_models.py"
+    ],
+    "model": "gpt-4o-mini",
+    "success": true,
+    "error": null,
+    "token_usage": {
+      "prompt_tokens": 1990,
+      "completion_tokens": 35,
+      "total_tokens": 2025
+    },
+    "generated_code": "def __bool__(self) -> bool:\n        \"\"\"Return True when the amount is non-zero.\"\"\"\n        return self._cents != 0"
+  }
+]
